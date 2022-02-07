@@ -5,21 +5,37 @@ using UnityEngine;
 public class FPSInput : MonoBehaviour
 {
 
+    private CharacterController charController;
+
     private float speed = 9.0f;
-    private float xMove;
-    private float yMove;
+    private float gravity = -9.81f;
+
+    private void Start()
+    {
+        charController = GetComponent<CharacterController>();
+    }
 
     void Update()
     {
-        this.xMove = Input.GetAxis("Horizontal");
-        this.yMove = Input.GetAxis("Vertical");
+        float deltaX = Input.GetAxis("Horizontal"); 
+        float deltaZ = Input.GetAxis("Vertical"); 
+
+        Vector3 movement = new Vector3(deltaX, 0, deltaZ); 
+
+        // Clamp magnitude for diagonal movement
+        movement = Vector3.ClampMagnitude (movement, 1.0f);
+                                                                                                                                                 
+        // determine how far to move on the XZ plane
+        movement *= speed;
+
+        movement.y = gravity;
+
+        // Movement code Frame Rate Independent
+        movement *= Time.deltaTime;
+                                                                                                                                                 
+        // Convert local to global coordinates
+        movement = transform.TransformDirection (movement);
+        charController.Move (movement);
     }
 
-    void FixedUpdate()
-    {
-
-        Vector3 movement = new Vector3(xMove, 0, yMove);
-        transform.Translate(movement * speed * Time.deltaTime, Space.Self);
-
-    }
 }

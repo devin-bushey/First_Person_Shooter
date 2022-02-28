@@ -10,11 +10,30 @@ public class SceneController : MonoBehaviour
     private GameObject enemy;
     private Vector3 spawnPoint = new Vector3(0, 0, 5);
     private int numEnemies = 3;
-    private GameObject[] arrEnemies; 
+    private GameObject[] arrEnemies;
+
+    [SerializeField] private GameObject iguanaPrefab;
+    private GameObject iguana;
+    private Vector3 spawnPointIguana = new Vector3(0, 0, 2);
+    private int numIguanas = 7;
+    private GameObject[] arrIguana;
 
     private void Start()
     {
         arrEnemies = new GameObject[numEnemies];
+        arrIguana = new GameObject[numIguanas];
+
+        for (int i = 0; i < numIguanas; i++)
+        {
+            if (arrIguana[i] == null)
+            {
+                iguana = Instantiate(iguanaPrefab) as GameObject;
+                iguana.transform.position = spawnPointIguana;
+                float angle = Random.Range(0, 360);
+                iguana.transform.Rotate(0, angle, 0);
+                arrIguana[i] = iguana;
+            }
+        }
     }
 
     void Update()

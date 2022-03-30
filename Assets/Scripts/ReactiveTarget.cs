@@ -5,21 +5,27 @@ using UnityEngine;
 public class ReactiveTarget : MonoBehaviour
 {
 
+    private bool isAlive = true;
+
     public void ReactToHit() 
     {
-        WanderingAI enemyAI = GetComponent<WanderingAI>();
-        if (enemyAI != null)
+        if (isAlive)
         {
-            enemyAI.ChangeState(EnemyStates.dead);
-        }
+            WanderingAI enemyAI = GetComponent<WanderingAI>();
+            if (enemyAI != null)
+            {
+                enemyAI.ChangeState(EnemyStates.dead);
+            }
 
-        Animator enemyAnimator = GetComponent<Animator>(); 
-        if (enemyAnimator != null) 
-        { 
-            enemyAnimator.SetTrigger("Die"); 
-        }
+            Animator enemyAnimator = GetComponent<Animator>(); 
+            if (enemyAnimator != null) 
+            { 
+                enemyAnimator.SetTrigger("Die"); 
+            }
 
-        //StartCoroutine(Die());       
+            isAlive = false;
+            Messenger.Broadcast(GameEvent.ENEMY_DEAD);
+        }
     }
 
     private IEnumerator Die()

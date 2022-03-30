@@ -12644,6 +12644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2535560979964291085, guid: 79ee4373b2d118140b173ccf8c1be87a, type: 3}
   iguanaPrefab: {fileID: 978251232742494332, guid: 409ff41a30b9a064e941e23589a0c49a, type: 3}
+  ui: {fileID: 1226733255}
 --- !u!1 &2019262477
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerCharacter : MonoBehaviour
 {
     private int health;
+    private int maxHealth = 5;
+
     // Use this for initialization
     void Start()
     {
-        health = 5;
+        health = maxHealth;
     }
     public void Hit()
     {
@@ -18,5 +20,7 @@ public class PlayerCharacter : MonoBehaviour
         {
             Debug.Break();
         }
+        float percent = (float)health / maxHealth;
+        Messenger<float>.Broadcast(GameEvent.HEALTH_CHANGED, percent);
     }
 }

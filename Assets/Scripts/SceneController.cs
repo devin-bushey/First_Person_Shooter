@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class SceneController : MonoBehaviour
 
     void Update()
     {
+
         for (int i = 0; i < numEnemies; i++)
         {
             if (arrEnemies[i] == null)
@@ -53,17 +55,21 @@ public class SceneController : MonoBehaviour
                 ai.SetDifficulty(GetDifficulty());
             }
         }
-        
+
     }
     void Awake() 
     {
         Messenger<int>.AddListener(GameEvent.DIFFICULTY_CHANGED, OnDifficultyChanged);
-        Messenger.AddListener(GameEvent.ENEMY_DEAD, this.OnEnemyDead); 
+        Messenger.AddListener(GameEvent.ENEMY_DEAD, this.OnEnemyDead);
+        Messenger.AddListener(GameEvent.PLAYER_DEAD, OnPlayerDead);
+        Messenger.AddListener(GameEvent.RESTART_GAME, OnRestartGame);
     }
     void OnDestroy() 
     {
         Messenger<int>.RemoveListener(GameEvent.DIFFICULTY_CHANGED, OnDifficultyChanged);
-        Messenger.RemoveListener(GameEvent.ENEMY_DEAD, this.OnEnemyDead); 
+        Messenger.RemoveListener(GameEvent.ENEMY_DEAD, this.OnEnemyDead);
+        Messenger.RemoveListener(GameEvent.PLAYER_DEAD, OnPlayerDead);
+        Messenger.RemoveListener(GameEvent.RESTART_GAME, OnRestartGame);
     }
     void OnEnemyDead()
     {
@@ -86,5 +92,14 @@ public class SceneController : MonoBehaviour
         return PlayerPrefs.GetInt("difficulty", 1);
     }
 
+    private void OnPlayerDead()
+    {
+        ui.ShowGameOverPopup();
+    }
+
+    public void OnRestartGame()
+    {
+        SceneManager.LoadScene(0);
+    }
 
 }

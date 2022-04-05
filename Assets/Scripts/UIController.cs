@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private Image crossHair;
     [SerializeField] private OptionsPopup optionsPopup;
     [SerializeField] private SettingsPopup settingsPopup;
+    [SerializeField] private GameOverPopup gameOverPopup;
 
     private int popupsOpen = 0;
 
@@ -23,9 +24,10 @@ public class UIController : MonoBehaviour
     {
         if (active)
         {
-            Debug.Log("SetGameActive active");
+            //Debug.Log("SetGameActive active");
             Time.timeScale = 1; // unpause the game
-            Cursor.lockState = CursorLockMode.Locked; // show the cursor
+            Cursor.visible = false; // hide cursor
+            Cursor.lockState = CursorLockMode.Locked; // hide the cursor
             crossHair.gameObject.SetActive(true); // show the crosshair
             Messenger.Broadcast(GameEvent.GAME_ACTIVE);
         }
@@ -33,6 +35,7 @@ public class UIController : MonoBehaviour
         {
             Debug.Log("SetGameActive inactive");
             Time.timeScale = 0; // pause the game
+            Cursor.visible = true; // show cursor
             Cursor.lockState = CursorLockMode.None; // show the cursor
             crossHair.gameObject.SetActive(false); // turn off the crosshair
 
@@ -50,13 +53,13 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && this.popupsOpen == 0)
-        {
-            optionsPopup.Open();
-        }
-        else if (!optionsPopup.IsActive() && !settingsPopup.IsActive())
-        {
-            SetGameActive(true);
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            if (this.popupsOpen == 0)
+            {
+                optionsPopup.Open();
+                //SetGameActive(true);
+                //Messenger.Broadcast(GameEvent.GAME_INACTIVE);
+            }
         }
     }
 
@@ -104,5 +107,12 @@ public class UIController : MonoBehaviour
         }
 
     }
+
+    public void ShowGameOverPopup()
+    {
+        gameOverPopup.Open();
+    }
+
+
 
 }

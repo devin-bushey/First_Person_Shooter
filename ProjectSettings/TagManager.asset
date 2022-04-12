@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ball
+  - Room_01
+  - Waypoints
+  - Waypoints_room1
   layers:
   - Default
   - TransparentFX

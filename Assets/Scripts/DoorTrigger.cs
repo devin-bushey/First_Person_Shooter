@@ -6,17 +6,46 @@ public class DoorTrigger : MonoBehaviour
 {
 
     [SerializeField] private DoorControl doorControl;
+
+    [SerializeField] private SceneController scene;
+
+    [SerializeField] private int numEnemiesAlive;
+
+    private bool hasBeenOpened = false;
+    private bool hasBeenClosed = false;
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" ){
-            doorControl.Operate();
+
+        Debug.Log("Door: scene.enemiesAlive: " + scene.enemiesAlive + " numEnemiesAlive: " + numEnemiesAlive);
+
+        if (scene.enemiesAlive == numEnemiesAlive)
+        {
+            hasBeenOpened = false;
+            hasBeenClosed = false;
+        }
+
+        if (!hasBeenOpened && !hasBeenClosed && (scene.enemiesAlive == numEnemiesAlive))
+        {
+            if (other.tag == "Player")
+            {
+                doorControl.Operate();
+                hasBeenOpened = true;
+            }
         }
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        // TODO: what if the player goes back into last room, then enemies spawn in next room,
+        // door closes, and the player cant kill enemies to re-open door
+        if (hasBeenOpened && !hasBeenClosed)
         {
-            doorControl.Operate();
+            if (other.tag == "Player")
+            {
+                doorControl.Operate();
+                hasBeenClosed = true;
+            }
         }
+        
     }
 }

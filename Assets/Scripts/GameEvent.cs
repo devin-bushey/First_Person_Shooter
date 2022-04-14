@@ -20,4 +20,6 @@ public static class GameEvent
 
     public const string RESTART_GAME = "RESTART_GAME";
 
+    public const string HAS_KEY = "HAS_KEY";
+
 }

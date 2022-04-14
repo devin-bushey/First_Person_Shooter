@@ -69,8 +69,6 @@ public class UIController : MonoBehaviour
             if (this.popupsOpen == 0)
             {
                 optionsPopup.Open();
-                //SetGameActive(true);
-                //Messenger.Broadcast(GameEvent.GAME_INACTIVE);
             }
         }
 
@@ -105,7 +103,7 @@ public class UIController : MonoBehaviour
 
     private void OnHealthChanged(float healthPercentage)
     {
-        Debug.Log("UI.OnHealthChanged(" + healthPercentage + ")");
+        //Debug.Log("UI.OnHealthChanged(" + healthPercentage + ")");
         PlayerCharacter player = GetComponent<PlayerCharacter>();
         healthBar.color = Color.Lerp(Color.green, Color.red, 1-healthPercentage);
         healthBar.fillAmount = healthPercentage;
@@ -113,7 +111,7 @@ public class UIController : MonoBehaviour
 
     private void OnPopupsOpened()
     {
-        Debug.Log("UI.OnPopupsOpened(" + this.popupsOpen + ")");
+        //Debug.Log("UI.OnPopupsOpened(" + this.popupsOpen + ")");
 
         if (this.popupsOpen == 0)
         {
@@ -125,7 +123,7 @@ public class UIController : MonoBehaviour
 
     private void OnPopupsClosed()
     {
-        Debug.Log("UI.OnPopupsClosed(" + this.popupsOpen + ")");
+        //Debug.Log("UI.OnPopupsClosed(" + this.popupsOpen + ")");
         this.popupsOpen--;
         if (this.popupsOpen == 0)
         {

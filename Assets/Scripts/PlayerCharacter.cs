@@ -6,6 +6,7 @@ public class PlayerCharacter : MonoBehaviour
 {
     private int health;
     private int maxHealth = 5;
+    public bool hasKey = true;
 
     // Use this for initialization
     void Start()
@@ -15,7 +16,7 @@ public class PlayerCharacter : MonoBehaviour
     public void Hit()
     {
         health -= 1;
-        Debug.Log("Health: " + health);
+        //Debug.Log("Health: " + health);
         if (health == 0)
         {
             if (health <= 0)
@@ -37,6 +38,16 @@ public class PlayerCharacter : MonoBehaviour
         }
         float healthPercent = ((float)health) / maxHealth; 
         Messenger<float>.Broadcast(GameEvent.HEALTH_CHANGED, healthPercent);
+    }
+
+    public void PickUpKey()
+    {
+        hasKey = true;
+    }
+
+    public void UseKey()
+    {
+        hasKey = false;
     }
 
 }

@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] GameObject[] waypoints;
 
+    [SerializeField] GameObject keyModel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -88,13 +90,14 @@ public class Enemy : MonoBehaviour
     {
         if (this.state == EnemyStates.alive)
         {
-            Debug.Log("Enemy Hit");
+            //Debug.Log("Enemy Hit");
             health -= 1;
-            Debug.Log("Enemy Health: " + health);
+            //Debug.Log("Enemy Health: " + health);
             if (health == 0)
             {
                 if (health <= 0)
                 {
+
                     Enemy enemyAI = GetComponent<Enemy>();
                     if (enemyAI != null)
                     {
@@ -108,11 +111,25 @@ public class Enemy : MonoBehaviour
                     }
                     this.state = EnemyStates.dead;
                     Messenger.Broadcast(GameEvent.ENEMY_DEAD);
+
+                    if (enemyAI.CompareTag("HasKey"))
+                    {
+                        DropKey();
+                    }
                 }
             }
             float percent = (float)health / maxHealth;
             healthBar.fillAmount = percent;
         }
+    }
+
+    void DropKey()
+    {
+        Vector3 position = transform.position; //position of enemy
+        
+        GameObject key = Instantiate(keyModel, position + new Vector3(1.0f, 1.0f, 0.0f), Quaternion.identity); // key drop
+        key.transform.Rotate(90f, 0f, 0f);
+        key.SetActive(true);
     }
 
 }

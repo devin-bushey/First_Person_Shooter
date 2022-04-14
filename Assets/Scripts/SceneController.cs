@@ -22,19 +22,21 @@ public class SceneController : MonoBehaviour
         Messenger.AddListener(GameEvent.ENEMY_DEAD, this.OnEnemyDead);
         Messenger.AddListener(GameEvent.PLAYER_DEAD, OnPlayerDead);
         Messenger.AddListener(GameEvent.RESTART_GAME, OnRestartGame);
+        Messenger<bool>.AddListener(GameEvent.HAS_KEY, this.OnKeyPickUp);
     }
     void OnDestroy() 
     {
         Messenger.RemoveListener(GameEvent.ENEMY_DEAD, this.OnEnemyDead);
         Messenger.RemoveListener(GameEvent.PLAYER_DEAD, OnPlayerDead);
         Messenger.RemoveListener(GameEvent.RESTART_GAME, OnRestartGame);
+        Messenger<bool>.RemoveListener(GameEvent.HAS_KEY, this.OnKeyPickUp);
     }
     void OnEnemyDead()
     {
         enemiesAlive--;
         score++;
         ui.UpdateScore(score);
-        Debug.Log("Enemy Dead. " + enemiesAlive + " alive");
+        //Debug.Log("Enemy Dead. " + enemiesAlive + " alive");
     }
 
     private void OnPlayerDead()
@@ -45,6 +47,12 @@ public class SceneController : MonoBehaviour
     public void OnRestartGame()
     {
         SceneManager.LoadScene(0);
+    }
+
+    private void OnKeyPickUp(bool hasKey)
+    {
+        
+        
     }
 
 }

@@ -10,6 +10,7 @@ TagManager:
   - Enemy_room02
   - Waypoints_room2
   - WelcomeMsg
+  - HasKey
   layers:
   - Default
   - TransparentFX

@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
         PlayerCharacter player = collision.gameObject.GetComponent<PlayerCharacter>();
         if (player != null)
         {
-            Debug.Log("Player Hit");
+            //Debug.Log("Player Hit");
             player.Hit();
         }
 

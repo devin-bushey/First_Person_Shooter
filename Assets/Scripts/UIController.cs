@@ -11,8 +11,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private Image crossHair;
     [SerializeField] private OptionsPopup optionsPopup;
-    [SerializeField] private SettingsPopup settingsPopup;
     [SerializeField] private GameOverPopup gameOverPopup;
+    [SerializeField] private WelcomePopup welcomePopup;
 
     private int popupsOpen = 0;
     private float timeRemaining = 60f;
@@ -55,7 +55,8 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        SetGameActive(true);
+        //SetGameActive(true);
+        welcomePopup.Open();
         UpdateScore(0);
         UpdateTime(100);
         healthBar.fillAmount = 1; 
@@ -135,6 +136,7 @@ public class UIController : MonoBehaviour
 
     public void ShowGameOverPopup()
     {
+        gameOverPopup.ShowScore(scoreValue.text);
         gameOverPopup.Open();
     }
 

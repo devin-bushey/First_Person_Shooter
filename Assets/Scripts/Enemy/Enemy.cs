@@ -31,11 +31,7 @@ public class Enemy : MonoBehaviour
     private int maxHealth = 5;
     [SerializeField] private Image healthBar;
 
-    private float enemySpeed = 1.75f;
-    private float baseSpeed = 0.25f;
-    float difficultySpeedDelta = 0.3f; // the change in speed per level of difficulty
-
-    [SerializeField] GameObject[] waypointsTest;
+    [SerializeField] GameObject[] waypoints;
 
     // Start is called before the first frame update
     void Start()
@@ -45,18 +41,20 @@ public class Enemy : MonoBehaviour
         Waypoints = new List<Transform>();
         this.state = EnemyStates.alive;
         health = maxHealth;
-        //GameObject waypointsParent = GameObject.FindGameObjectWithTag("Waypoints");
-        //foreach (Transform t in waypointsParent.transform)
-        //{
-        //    Waypoints.Add(t);
-        //}
-        
-        foreach (GameObject go in waypointsTest)
+
+        foreach (GameObject wp in waypoints)
         {
-            Waypoints.Add(go.transform);
+            Waypoints.Add(wp.transform);
         }
 
     }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireSphere(transform.position, AttackRange);
+    //    Gizmos.DrawWireSphere(transform.position, ChaseRange);
+    //    Gizmos.DrawWireSphere(transform.position, AttackRangeStop);
+    //}
 
     public void Shoot()
     {
@@ -64,11 +62,6 @@ public class Enemy : MonoBehaviour
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * projectileForwardForce, ForceMode.Impulse);
         rb.AddForce(transform.up * projectileUpForce, ForceMode.Impulse);
-    }
-
-    private void OnDrawGizmos()
-    {
-        //Gizmos.DrawWireSphere(transform.position, ChaseRange);
     }
 
     public float GetDistanceFromPlayer()
@@ -120,17 +113,6 @@ public class Enemy : MonoBehaviour
             float percent = (float)health / maxHealth;
             healthBar.fillAmount = percent;
         }
-    }
-
-    public void SetDifficulty(int newDifficulty)
-    {
-        OnDifficultyChanged(newDifficulty);
-    }
-
-    void OnDifficultyChanged(int difficulty)
-    {
-        Debug.Log("Enemy.setDifficulty(" + difficulty + ")");
-        enemySpeed = baseSpeed + (difficulty * difficultySpeedDelta);
     }
 
 }

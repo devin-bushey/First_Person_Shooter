@@ -36,8 +36,7 @@ public class DoorTrigger : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        // TODO: what if the player goes back into last room, then enemies spawn in next room,
-        // door closes, and the player cant kill enemies to re-open door
+
         if (hasBeenOpened && !hasBeenClosed)
         {
             if (other.tag == "Player")

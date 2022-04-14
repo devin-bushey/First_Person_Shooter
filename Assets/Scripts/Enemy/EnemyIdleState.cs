@@ -12,7 +12,7 @@ public class EnemyIdleState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.gameObject.GetComponentInParent<Enemy>();
-        enemy.Agent.SetDestination(enemy.transform.position); // dont move
+        
         timer = 0;
 
     }
@@ -20,6 +20,7 @@ public class EnemyIdleState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        enemy.Agent.SetDestination(enemy.transform.position); // dont move
         timer += Time.deltaTime;
         if (timer > enemy.IdleTime)
         {

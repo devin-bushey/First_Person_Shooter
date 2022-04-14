@@ -7,17 +7,27 @@ using TMPro;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreValue;
+    [SerializeField] private TextMeshProUGUI timeValue;
     [SerializeField] private Image healthBar;
     [SerializeField] private Image crossHair;
     [SerializeField] private OptionsPopup optionsPopup;
-    [SerializeField] private SettingsPopup settingsPopup;
     [SerializeField] private GameOverPopup gameOverPopup;
+    [SerializeField] private WelcomePopup welcomePopup;
 
     private int popupsOpen = 0;
+    private float timeRemaining = 60f;
 
     // update score display
     public void UpdateScore(int newScore){
         scoreValue.text = newScore.ToString();
+    }
+
+    public void UpdateTime(float timeToDisplay)
+    {
+        timeToDisplay += 1;
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        timeValue.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void SetGameActive(bool active)
@@ -45,8 +55,10 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        SetGameActive(true);
+        //SetGameActive(true);
+        welcomePopup.Open();
         UpdateScore(0);
+        UpdateTime(100);
         healthBar.fillAmount = 1; 
         healthBar.color = Color.green;
     }
@@ -61,6 +73,20 @@ public class UIController : MonoBehaviour
                 //Messenger.Broadcast(GameEvent.GAME_INACTIVE);
             }
         }
+
+        if (this.popupsOpen == 0)
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                UpdateTime(timeRemaining);
+            }
+            else
+            {
+                ShowGameOverPopup();
+            }
+        }
+        
     }
 
     void Awake()
@@ -110,6 +136,7 @@ public class UIController : MonoBehaviour
 
     public void ShowGameOverPopup()
     {
+        gameOverPopup.ShowScore(scoreValue.text);
         gameOverPopup.Open();
     }
 

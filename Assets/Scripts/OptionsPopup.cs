@@ -6,23 +6,6 @@ using UnityEngine.UI;
 public class OptionsPopup : BasePopup
 {
 
-    [SerializeField] private SettingsPopup settingsPopup;
-
-
-    //public void Close()
-    //{
-    //    gameObject.SetActive(false);
-    //}
-    //public bool IsActive() { 
-    //    return gameObject.activeSelf; 
-    //}
-
-    public void OnSettingsButton()
-    {
-        Close();
-        settingsPopup.Open();
-        Debug.Log("settings clicked");
-    }
     public void OnExitGameButton()
     {
         Debug.Log("exit game");

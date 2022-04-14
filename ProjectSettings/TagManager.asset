@@ -4,7 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ball
+  - Room_01
+  - Waypoints
+  - Waypoints_room1
+  - Enemy_room02
+  - Waypoints_room2
+  - WelcomeMsg
   layers:
   - Default
   - TransparentFX

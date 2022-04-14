@@ -14,8 +14,7 @@ public class SceneController : MonoBehaviour
 
     private void Start()
     {
-        enemiesAlive = 5;
-        
+        enemiesAlive = Object.FindObjectsOfType<Enemy>().Length;
     }
     
     void Awake() 
@@ -32,10 +31,10 @@ public class SceneController : MonoBehaviour
     }
     void OnEnemyDead()
     {
-        Debug.Log("Enemy Dead. " + enemiesAlive + " alive");
         enemiesAlive--;
         score++;
         ui.UpdateScore(score);
+        Debug.Log("Enemy Dead. " + enemiesAlive + " alive");
     }
 
     private void OnPlayerDead()

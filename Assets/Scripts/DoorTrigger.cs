@@ -9,7 +9,7 @@ public class DoorTrigger : MonoBehaviour
 
     [SerializeField] private SceneController scene;
 
-    [SerializeField] private int numEnemiesAlive;
+    [SerializeField] private int numEnemiesAliveInRoom;
 
     private bool hasBeenOpened = false;
     private bool hasBeenClosed = false;
@@ -17,15 +17,18 @@ public class DoorTrigger : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-        Debug.Log("Door: scene.enemiesAlive: " + scene.enemiesAlive + " numEnemiesAlive: " + numEnemiesAlive);
-
-        if (scene.enemiesAlive == numEnemiesAlive)
+        if (scene.enemiesAlive != numEnemiesAliveInRoom)
+        {
+            Debug.Log("Door Locked!: " + (scene.enemiesAlive - numEnemiesAliveInRoom) + " enemie(s) left");
+        }
+        
+        if (scene.enemiesAlive == numEnemiesAliveInRoom)
         {
             hasBeenOpened = false;
             hasBeenClosed = false;
         }
 
-        if (!hasBeenOpened && !hasBeenClosed && (scene.enemiesAlive == numEnemiesAlive))
+        if (!hasBeenOpened && !hasBeenClosed && (scene.enemiesAlive == numEnemiesAliveInRoom))
         {
             if (other.tag == "Player")
             {

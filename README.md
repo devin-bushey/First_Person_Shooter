@@ -3,4 +3,5 @@
 FPS game built in Unity/C#
 
 You have 60 seconds to destroy as many enemies as you can.
-Destroy all enemies in each room to unlock each door.
+Left click for sniper shot. Right click to fire grenade.
+Destroy enemies to pick up keys to unlock doors.

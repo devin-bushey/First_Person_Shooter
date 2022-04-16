@@ -17,6 +17,12 @@ public class Projectile : MonoBehaviour
             player.Hit();
         }
 
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.ReactToHit();
+        }
+
         GameObject impac = Instantiate(impactPrefab, transform.position, Quaternion.identity);
         Destroy(impac, 2);
         Destroy(gameObject);

@@ -16,10 +16,10 @@ public class DoorTrigger : MonoBehaviour
 
             //Debug.Log("Does player have a key?: " + player.hasKey);
 
-            if (player.hasKey)
+            if (player.HasKey())
             {
                 doorControl.Operate();
-                player.hasKey = false;
+                player.UseKey();
             }
         }
 

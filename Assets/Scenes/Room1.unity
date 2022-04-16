@@ -7884,7 +7884,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.1309, y: -75}
+  m_AnchoredPosition: {x: -8.1309, y: -100}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &634433063
@@ -11180,6 +11180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453e4834e874a24408383967f728f328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 3689737860968868020, guid: 54e45b37562ec124aaff99f308164d3c, type: 3}
+  projectileSpawnPt: {fileID: 1336476835}
 --- !u!4 &967076649 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: c5fe18f281c2fa548b3124b44d5882d4, type: 3}
@@ -13060,6 +13062,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
+  - {fileID: 1336476835}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13087,7 +13090,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2cb556630637b40bd106fe152481c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasKey: 0
 --- !u!136 &1139078974
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -19188,6 +19190,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4979265355512558535, guid: c75644aea6d17454eb0d19d5806ae3c8, type: 3}
   m_PrefabInstance: {fileID: 148689823}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1336476834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1336476835}
+  m_Layer: 0
+  m_Name: ProjectileSpawnPt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1336476835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336476834}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.44, z: 1.21}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1139078971}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1340204739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 620111212253061141, guid: a75d27a48ee6f0045add3d0cde759053, type: 3}
@@ -21148,8 +21180,12 @@ MonoBehaviour:
     You have 60 seconds to destroy as many enemies as you can.
 
 
-    Destroy
-    all enemies to pick up keys to unlock each door.'
+    Left
+    click for sniper shot. Right click to fire grenade.
+
+
+    Destroy enemies to
+    pick up keys to unlock doors.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
